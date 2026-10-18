@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Sistema de diseño de Torre Fuerte
+   Heredado del prototipo original: fondo verde azulado casi negro, cian como
+   color primario, dorado como acento, tipografías Space Grotesk (títulos) +
+   Inter (cuerpo). Sobre esa base se monta una capa de vidrio esmerilado
+   (glassmorphism) con relieve suave (neumorphism): paneles translúcidos al
+   10% con blur, bordes finos y una sombra de dos tonos que da la sensación
+   de estar "flotando" o "hundido" según el componente.
+
+   Los colores se definen UNA sola vez como variables por tema. Los
+   componentes usan nombres semánticos (bg-surface, text-muted...) y no
+   valores sueltos, así el tema claro y el oscuro se diseñan por separado.
+   ========================================================================== */
+
+/* Tema oscuro (por defecto, es el tema de la marca) */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --tf-bg: #001116;
+  --tf-surface: #00161c;
+  --tf-surface-high: #00232c;
+  --tf-line: rgb(255 255 255 / 0.12);
+  --tf-fg: #e5e5e5;
+  --tf-muted: #9db4bb;
+  --tf-primary: #89efff;
+  --tf-accent: #cc9900;
+  --tf-accent-text: #cc9900;
+  --tf-on-accent: #000000;
+
+  /* Componentes RGB para construir el vidrio al 10% de opacidad y las
+     sombras duales del relieve neumórfico. */
+  --tf-glass-rgb: 20 40 46;
+  --tf-fg-rgb: 229 229 229;
+  --tf-primary-rgb: 137 239 255;
+  --tf-accent-rgb: 204 153 0;
+  --tf-shadow-dark: rgb(0 0 0 / 0.6);
+  --tf-shadow-light: rgb(255 255 255 / 0.05);
+}
+
+/* Tema claro: mismos roles, valores propios con contraste AA verificado */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --tf-bg: #f3f7f8;
+  --tf-surface: #e8eff1;
+  --tf-surface-high: #dce6e9;
+  --tf-line: rgb(0 17 22 / 0.16);
+  --tf-fg: #001116;
+  --tf-muted: #4a626a;
+  --tf-primary: #00596a;
+  --tf-accent: #cc9900;
+  --tf-accent-text: #7a5c00;
+  --tf-on-accent: #000000;
+
+  --tf-glass-rgb: 255 255 255;
+  --tf-fg-rgb: 0 17 22;
+  --tf-primary-rgb: 0 89 106;
+  --tf-accent-rgb: 204 153 0;
+  --tf-shadow-dark: rgb(0 17 22 / 0.18);
+  --tf-shadow-light: rgb(255 255 255 / 0.7);
+}
+
+@theme inline {
+  /* Se limpian las paletas y radios por defecto de Tailwind para que solo
+     existan los del sistema de diseño. */
+  --color-*: initial;
+  --radius-*: initial;
+
+  --color-bg: var(--tf-bg);
+  --color-surface: var(--tf-surface);
+  --color-surface-high: var(--tf-surface-high);
+  --color-line: var(--tf-line);
+  --color-fg: var(--tf-fg);
+  --color-muted: var(--tf-muted);
+  --color-primary: var(--tf-primary);
+  --color-accent: var(--tf-accent);
+  --color-accent-text: var(--tf-accent-text);
+  --color-on-accent: var(--tf-on-accent);
+
+  --font-headline: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radios moderados: dan suavidad al vidrio sin perder el carácter
+     angular/arquitectónico de la marca (nada de "burbujas"). */
+  --radius-tf-sm: 10px;
+  --radius-tf-md: 16px;
+  --radius-tf-lg: 24px;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    scroll-behavior: smooth;
+  }
+  body {
+    position: relative;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-headline);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+}
+
+/* ==========================================================================
+   Vidrio y relieve (glassmorphism + neumorphism)
+   ========================================================================== */
+
+/* Panel base: fondo al 10% de opacidad + desenfoque + borde fino + sombra
+   dual (oscura abajo-derecha, clara arriba-izquierda) que simula relieve. */
+.glass {
+  background-color: rgb(var(--tf-glass-rgb) / 0.1);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgb(var(--tf-fg-rgb) / 0.08);
+  box-shadow:
+    8px 8px 20px -4px var(--tf-shadow-dark),
+    -6px -6px 16px -6px var(--tf-shadow-light);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Variante interactiva: se eleva al pasar el cursor, se "presiona" al hacer clic. */
+.glass-interactive {
+  cursor: pointer;
+}
+.glass-interactive:hover {
+  transform: translateY(-3px);
+  border-color: rgb(var(--tf-primary-rgb) / 0.35);
+  box-shadow:
+    12px 14px 28px -6px var(--tf-shadow-dark),
+    -8px -8px 20px -6px var(--tf-shadow-light);
+}
+.glass-interactive:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Variante hundida: para campos de formulario, da sensación de estar
+   "presionado" dentro de la superficie en vez de flotando sobre ella. */
+.glass-sunken {
+  background-color: rgb(var(--tf-glass-rgb) / 0.1);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgb(var(--tf-fg-rgb) / 0.08);
+  box-shadow:
+    inset 4px 4px 10px -2px var(--tf-shadow-dark),
+    inset -4px -4px 10px -4px var(--tf-shadow-light);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-sunken:focus-within {
+  border-color: rgb(var(--tf-primary-rgb) / 0.5);
+  box-shadow:
+    inset 4px 4px 10px -2px var(--tf-shadow-dark),
+    inset -4px -4px 10px -4px var(--tf-shadow-light),
+    0 0 0 3px rgb(var(--tf-primary-rgb) / 0.15);
+}
+
+/* Variante presionada: para el chip de filtro activo, con tinte de acento. */
+.glass-pressed {
+  background-color: rgb(var(--tf-accent-rgb) / 0.16);
+  border: 1px solid rgb(var(--tf-accent-rgb) / 0.5);
+  box-shadow:
+    inset 3px 3px 8px -2px rgb(0 0 0 / 0.35),
+    inset -2px -2px 6px -2px rgb(var(--tf-accent-rgb) / 0.25);
+  color: var(--tf-accent-text);
+}
+
+/* Animación de entrada: aparece y sube levemente al montar. Se usa con
+   animation-delay inline para escalonar listas de tarjetas. */
+@keyframes tf-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tf-reveal {
+  animation: tf-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Subrayado animado para los enlaces de navegación. */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background-color: var(--tf-accent);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after {
+  width: 100%;
+}
+
+/* Íconos del selector de tema: cada uno se ve solo en su tema */
+html[data-theme="light"] .when-dark,
+html[data-theme="dark"] .when-light {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

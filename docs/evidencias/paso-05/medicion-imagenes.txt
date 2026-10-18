@@ -1,0 +1,6 @@
+Salida real de: node scripts/optimizar-imagenes.mjs <carpeta-con-fotos-originales>
+
+Imágenes procesadas: 55
+Peso original:    51.2 MB
+Peso optimizado:  7.1 MB
+Reducción:        86%

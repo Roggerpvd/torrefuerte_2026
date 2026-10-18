@@ -1,0 +1,85 @@
+digraph DER {
+  graph [rankdir=TB, splines=ortho, nodesep=0.7, ranksep=0.9, bgcolor="white", fontname="Helvetica"];
+  node [shape=plaintext, fontname="Helvetica"];
+  edge [fontname="Helvetica", fontsize=11, color="#00596A", penwidth=1.3];
+
+  categorias [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#00596A"><font color="white"><b>categorias</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">nombre</td></tr>
+      <tr><td align="left">slug</td></tr>
+      <tr><td align="left">orden</td></tr>
+    </table>>];
+
+  proyectos [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#00596A"><font color="white"><b>proyectos</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">categoria_id  FK</td></tr>
+      <tr><td align="left">titulo</td></tr>
+      <tr><td align="left">anio</td></tr>
+      <tr><td align="left">descripcion</td></tr>
+      <tr><td align="left">orden</td></tr>
+      <tr><td align="left">publicado</td></tr>
+      <tr><td align="left">creado_en</td></tr>
+      <tr><td align="left">actualizado_en</td></tr>
+    </table>>];
+
+  proyecto_imagenes [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#00596A"><font color="white"><b>proyecto_imagenes</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">proyecto_id  FK</td></tr>
+      <tr><td align="left">url</td></tr>
+      <tr><td align="left">alt_texto</td></tr>
+      <tr><td align="left">orden</td></tr>
+    </table>>];
+
+  servicios [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#7A5C00"><font color="white"><b>servicios</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">titulo</td></tr>
+      <tr><td align="left">icono</td></tr>
+      <tr><td align="left">orden</td></tr>
+    </table>>];
+
+  servicio_items [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#7A5C00"><font color="white"><b>servicio_items</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">servicio_id  FK</td></tr>
+      <tr><td align="left">texto</td></tr>
+      <tr><td align="left">orden</td></tr>
+    </table>>];
+
+  mensajes_contacto [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#3F5860"><font color="white"><b>mensajes_contacto</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">nombre</td></tr>
+      <tr><td align="left">email</td></tr>
+      <tr><td align="left">telefono</td></tr>
+      <tr><td align="left">mensaje</td></tr>
+      <tr><td align="left">leido</td></tr>
+      <tr><td align="left">creado_en</td></tr>
+    </table>>];
+
+  usuarios_admin [label=<
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="6" bgcolor="white" color="#001116">
+      <tr><td bgcolor="#3F5860"><font color="white"><b>usuarios_admin</b></font></td></tr>
+      <tr><td align="left"><u>id</u>  PK</td></tr>
+      <tr><td align="left">email</td></tr>
+      <tr><td align="left">password_hash</td></tr>
+      <tr><td align="left">nombre</td></tr>
+      <tr><td align="left">creado_en</td></tr>
+      <tr><td align="left">ultimo_acceso</td></tr>
+    </table>>];
+
+  categorias -> proyectos [taillabel="1", headlabel="N", labeldistance=2.2];
+  proyectos -> proyecto_imagenes [taillabel="1", headlabel="N", labeldistance=2.2];
+  servicios -> servicio_items [taillabel="1", headlabel="N", labeldistance=2.2];
+
+  { rank=same; categorias; servicios; usuarios_admin; mensajes_contacto; }
+}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import type { ProyectoConImagenes } from "@/db/queries";
 
@@ -63,17 +62,22 @@ export function FiltroPortafolio({
               className="glass glass-interactive tf-reveal group block overflow-hidden rounded-tf-md"
               style={{ animationDelay: `${(i % 9) * 60}ms` }}
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-tf-md bg-surface-high">
+              {/* Sin alto fijo: la tarjeta toma la altura natural de su imagen,
+                  para que cada foto (vertical, horizontal o cuadrada) tenga su
+                  propio espacio en vez de recortarse o dejar franjas vacías. */}
+              <div className="w-full overflow-hidden rounded-t-tf-md bg-surface-high">
                 {p.imagenes[0] ? (
-                  <Image
+                  /* eslint-disable-next-line @next/next/no-img-element -- se omite
+                     "fill" a propósito: la imagen conserva su proporción natural
+                     y la tarjeta se adapta a su tamaño en vez de recortarla. */
+                  <img
                     src={p.imagenes[0].url}
                     alt={p.imagenes[0].altTexto ?? p.titulo}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    className="block h-auto max-h-96 w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center text-sm text-muted">
+                  <div className="flex h-64 items-center justify-center text-sm text-muted">
                     Sin imagen
                   </div>
                 )}

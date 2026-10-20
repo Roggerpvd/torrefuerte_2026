@@ -92,6 +92,12 @@
   html {
     background-color: var(--color-bg);
     scroll-behavior: smooth;
+    /* El sitio arranca con un zoom del 90%: la persona puede acercarlo con
+       Ctrl/Cmd "+" o el zoom del navegador como siempre, esto solo cambia el
+       punto de partida. Soportado en Chrome, Edge y Safari, y en Firefox
+       desde su versión 126; en un navegador más antiguo simplemente se ve
+       al 100% normal. */
+    zoom: 0.9;
   }
   body {
     position: relative;
@@ -221,6 +227,39 @@
 html[data-theme="light"] .when-dark,
 html[data-theme="dark"] .when-light {
   display: none;
+}
+
+/* Intro de bienvenida: el ícono aparece centrado, se mantiene un momento y
+   luego la "cámara" se acerca hasta atravesarlo (escala enorme + se
+   desvanece), justo cuando el fondo de la pantalla de intro también se
+   desvanece para revelar la página de atrás. Las dos animaciones comparten
+   duración para que calcen en el mismo instante. */
+@keyframes tf-intro-logo {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  18% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  68% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(42);
+    opacity: 0;
+  }
+}
+@keyframes tf-intro-bg {
+  0%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

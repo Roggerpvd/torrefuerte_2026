@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ClientesDestacados } from "@/components/home/ClientesDestacados";
 import { FiltroPortafolio } from "@/components/portafolio/FiltroPortafolio";
 import { FormularioContacto } from "@/components/contacto/FormularioContacto";
 import { getPortafolio, getServicios } from "@/db/queries";
@@ -82,6 +83,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <ClientesDestacados />
 
       {/* ──────────────────────── Portafolio ──────────────────────── */}
       <section id="portafolio" className={`mx-auto w-full max-w-screen-2xl px-6 py-24 md:px-12 ${ANCLA}`}>

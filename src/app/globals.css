@@ -271,3 +271,27 @@ html[data-theme="dark"] .when-light {
     scroll-behavior: auto !important;
   }
 }
+
+/* Cinta de clientes destacados: se desplaza de derecha a izquierda sin
+   detenerse. El contenido va duplicado una vez en el componente (y relleno
+   si hay pocos clientes reales) para que el recorrido se vea continuo
+   (en -50% ya volvió a empezar la copia). */
+@keyframes tf-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.tf-marquee-track {
+  animation: tf-marquee 16s linear infinite;
+}
+.tf-marquee-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tf-marquee-track {
+    animation: none;
+  }
+}

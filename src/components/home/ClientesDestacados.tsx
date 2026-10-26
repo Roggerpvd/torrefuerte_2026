@@ -4,13 +4,11 @@
 // veces seguidas para que el recorrido se vea continuo y lleno, incluso
 // cuando todavía hay un solo cliente cargado.
 //
-// El logo de Imagina School (sede Tacna) se muestra como texto por ahora:
-// no tengo el archivo real del logo, así que no puedo fabricar uno (sería
-// inventar la marca de un tercero). En cuanto lo subas (PNG o SVG, fondo
-// transparente idealmente), colócalo en public/imagenes/marca/ y agrégalo
-// aquí, por ejemplo:
-//   { nombre: "Imagina School", subtitulo: "Sede Tacna", logo: "/imagenes/marca/imagina-school.svg" }
-// y el <Chip> ya está listo para usarlo automáticamente.
+// Clientes reales con obras ejecutadas por la empresa (brochure
+// institucional). El logo de cada cliente, si se tiene, se coloca en
+// public/imagenes/marca/ y se referencia aquí con la ruta; el campo
+// "servicio" es el tipo de trabajo ejecutado para ese cliente (se
+// muestra como una etiqueta junto al nombre).
 import Image from "next/image";
 
 type ClienteDestacado = {
@@ -19,10 +17,54 @@ type ClienteDestacado = {
   /** Ruta dentro de /public al logo real (PNG o SVG). Opcional: sin esto
    *  se muestra el nombre como texto, igual que ahora. */
   logo?: string;
+  /** Tipo de servicio ejecutado para este cliente, p. ej. "Ampliación". */
+  servicio?: string;
 };
 
 const CLIENTES: ClienteDestacado[] = [
-  { nombre: "Imagina School", subtitulo: "Sede Tacna", logo: "/imagenes/marca/imaginaschool.png" },
+  {
+    nombre: "Imagina School",
+    subtitulo: "Sede Tacna",
+    logo: "/imagenes/marca/imaginaschool.png",
+    servicio: "Ampliación",
+  },
+  {
+    nombre: "Imagina School",
+    subtitulo: "Sede Arequipa",
+    logo: "/imagenes/marca/imaginaschool.png",
+    servicio: "Ampliación",
+  },
+  {
+    nombre: "Innova School",
+    subtitulo: "Sede Tacna",
+    logo: "/imagenes/marca/innova.png",
+    servicio: "Ampliación",
+  },
+  {
+    nombre: "Colegios Peruanos S.A.",
+    subtitulo: "Innova Schools — varias sedes",
+    servicio: "Supervisión y ampliación",
+  },
+  {
+    nombre: "Municipalidad Provincial de Tarata",
+    subtitulo: "Saneamiento y mantenimiento",
+    servicio: "Obra pública",
+  },
+  {
+    nombre: "Wayra Inmobiliaria SAC",
+    subtitulo: "Innova Schools, Moquegua",
+    servicio: "Ampliación",
+  },
+  {
+    nombre: "Consorcio Legionario",
+    subtitulo: "Gobierno Regional de Tacna",
+    servicio: "Mejoramiento",
+  },
+  {
+    nombre: "Varcoc Ingenieros SAC",
+    subtitulo: "Corporación ADC",
+    servicio: "Desmontaje",
+  },
 ];
 
 // Con pocos clientes reales la cinta se ve vacía o el recorrido tarda en
@@ -49,9 +91,16 @@ function Chip({ cliente }: { cliente: ClienteDestacado }) {
         <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
       )}
       <div>
-        <p className="font-headline text-lg font-bold uppercase leading-tight tracking-tight text-fg">
-          {cliente.nombre}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="font-headline text-lg font-bold uppercase leading-tight tracking-tight text-fg">
+            {cliente.nombre}
+          </p>
+          {cliente.servicio && (
+            <span className="rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-accent-text">
+              {cliente.servicio}
+            </span>
+          )}
+        </div>
         {cliente.subtitulo && (
           <p className="text-xs uppercase tracking-wide text-muted">{cliente.subtitulo}</p>
         )}
@@ -69,7 +118,7 @@ export function ClientesDestacados() {
       className="mx-auto w-full max-w-screen-2xl px-6 py-14 md:px-12"
     >
       <p className="tf-reveal text-center text-sm font-medium uppercase tracking-[0.2em] text-muted">
-        Proyectos Destacados
+        Proyectos 
       </p>
 
       <div

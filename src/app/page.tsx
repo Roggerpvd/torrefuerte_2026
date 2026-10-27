@@ -70,7 +70,7 @@ export default async function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/#portafolio"
-                className="glass glass-interactive rounded-tf-sm bg-accent/90 px-6 py-3 text-sm font-bold uppercase tracking-wide text-on-accent"
+                className="glass glass-interactive tf-texto-alto-contraste rounded-tf-sm bg-accent/90 px-6 py-3 text-sm font-bold uppercase tracking-wide"
               >
                 Ver portafolio
               </Link>

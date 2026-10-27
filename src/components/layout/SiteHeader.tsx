@@ -68,10 +68,10 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-4 px-4 py-4 md:px-8">
+      <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-3 sm:justify-between md:px-8 md:py-4">
         <Link href="/#inicio" className="flex items-center gap-3">
           <Logo className="h-8 w-auto shrink-0" />
-          <span className="font-headline text-lg font-bold uppercase tracking-tight">
+          <span className="hidden font-headline text-lg font-bold uppercase tracking-tight min-[420px]:inline">
             {site.name}
           </span>
         </Link>
@@ -91,8 +91,11 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <nav aria-label="Principal" className="flex items-center gap-5 md:hidden">
+        <div className="flex items-center gap-3 md:hidden">
+          <nav
+            aria-label="Principal"
+            className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -106,6 +109,10 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
+          <ThemeToggle />
+        </div>
+
+        <div className="hidden md:block">
           <ThemeToggle />
         </div>
       </div>

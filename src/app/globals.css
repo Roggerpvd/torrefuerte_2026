@@ -92,6 +92,11 @@
   html {
     background-color: var(--color-bg);
     scroll-behavior: smooth;
+    /* Red de seguridad: si algún elemento se pasa del ancho de la
+       pantalla (p. ej. el encabezado en celulares angostos), que el
+       navegador lo recorte en vez de ensanchar la página entera y
+       descuadrar todo con un hueco a la derecha. */
+    overflow-x: hidden;
   }
 
   /* El sitio arranca con un zoom del 90% solo en escritorio: la persona
@@ -108,6 +113,8 @@
   }
   body {
     position: relative;
+    overflow-x: hidden;
+    width: 100%;
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-body);

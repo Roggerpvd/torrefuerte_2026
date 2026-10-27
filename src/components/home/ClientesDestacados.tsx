@@ -23,24 +23,6 @@ type ClienteDestacado = {
 
 const CLIENTES: ClienteDestacado[] = [
   {
-    nombre: "Imagina School",
-    subtitulo: "Sede Tacna",
-    logo: "/imagenes/marca/imaginaschool.png",
-    servicio: "Ampliación",
-  },
-  {
-    nombre: "Imagina School",
-    subtitulo: "Sede Arequipa",
-    logo: "/imagenes/marca/imaginaschool.png",
-    servicio: "Ampliación",
-  },
-  {
-    nombre: "Innova School",
-    subtitulo: "Sede Tacna",
-    logo: "/imagenes/marca/innova.png",
-    servicio: "Ampliación",
-  },
-  {
     nombre: "Colegios Peruanos S.A.",
     subtitulo: "Innova Schools — varias sedes",
     servicio: "Supervisión y ampliación",
@@ -118,7 +100,7 @@ export function ClientesDestacados() {
       className="mx-auto w-full max-w-screen-2xl px-6 py-14 md:px-12"
     >
       <p className="tf-reveal text-center text-sm font-medium uppercase tracking-[0.2em] text-muted">
-        Proyectos 
+        Proyectos de mayor valor
       </p>
 
       <div

@@ -92,12 +92,19 @@
   html {
     background-color: var(--color-bg);
     scroll-behavior: smooth;
-    /* El sitio arranca con un zoom del 90%: la persona puede acercarlo con
-       Ctrl/Cmd "+" o el zoom del navegador como siempre, esto solo cambia el
-       punto de partida. Soportado en Chrome, Edge y Safari, y en Firefox
-       desde su versión 126; en un navegador más antiguo simplemente se ve
-       al 100% normal. */
-    zoom: 0.9;
+  }
+
+  /* El sitio arranca con un zoom del 90% solo en escritorio: la persona
+     puede acercarlo con Ctrl/Cmd "+" o el zoom del navegador como siempre,
+     esto solo cambia el punto de partida. `zoom` es una propiedad no
+     estándar que en navegadores móviles desincroniza el ancho de layout
+     (vw, 100%) con el ancho realmente renderizado, dejando un espacio en
+     blanco a la derecha y descuadrando la página; por eso se limita a
+     viewports de escritorio. */
+  @media (min-width: 1024px) {
+    html {
+      zoom: 0.9;
+    }
   }
   body {
     position: relative;
@@ -227,6 +234,16 @@
 html[data-theme="light"] .when-dark,
 html[data-theme="dark"] .when-light {
   display: none;
+}
+
+/* Texto que debe ser negro puro en tema claro y blanco puro en tema
+   oscuro (en vez del gris "muted" o el "fg" normal del tema), p. ej. la
+   lista de obras en "Servicios ejecutados". */
+.tf-texto-alto-contraste {
+  color: #000000;
+}
+html[data-theme="dark"] .tf-texto-alto-contraste {
+  color: #ffffff;
 }
 
 /* Intro de bienvenida: el ícono aparece centrado, se mantiene un momento y

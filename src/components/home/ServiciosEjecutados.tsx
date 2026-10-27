@@ -1,5 +1,4 @@
-
- // Detalle de obras ejecutadas por cliente, inmediatamente debajo de la
+// Detalle de obras ejecutadas por cliente, inmediatamente debajo de la
 // cinta de "Proyectos de mayor valor". Son datos reales tomados del
 // brochure institucional de la empresa: cada cliente es una tarjeta de
 // vidrio con su lista de obras, en el mismo lenguaje visual del resto
@@ -33,13 +32,7 @@ const CLIENTES_CON_OBRAS: ClienteConObras[] = [
   },
 ];
 
-function TarjetaCliente({
-  cliente,
-  indice,
-}: {
-  cliente: ClienteConObras;
-  indice: number;
-}) {
+function TarjetaCliente({ cliente, indice }: { cliente: ClienteConObras; indice: number }) {
   return (
     <div
       className="glass glass-interactive tf-reveal flex flex-col rounded-tf-lg p-8"
@@ -49,7 +42,6 @@ function TarjetaCliente({
         <h3 className="font-headline text-xl font-bold uppercase leading-tight tracking-tight text-fg md:text-2xl">
           {cliente.nombre}
         </h3>
-
         <span className="shrink-0 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-accent-text">
           Obra
         </span>
@@ -64,10 +56,7 @@ function TarjetaCliente({
             >
               ✓
             </span>
-
-            <span className="text-sm leading-relaxed text-black dark:text-white">
-              {obra}
-            </span>
+            <span className="tf-texto-alto-contraste text-sm leading-relaxed">{obra}</span>
           </li>
         ))}
       </ul>
@@ -89,11 +78,7 @@ export function ServiciosEjecutados() {
 
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {CLIENTES_CON_OBRAS.map((cliente, i) => (
-          <TarjetaCliente
-            key={cliente.nombre}
-            cliente={cliente}
-            indice={i}
-          />
+          <TarjetaCliente key={cliente.nombre} cliente={cliente} indice={i} />
         ))}
       </div>
     </section>

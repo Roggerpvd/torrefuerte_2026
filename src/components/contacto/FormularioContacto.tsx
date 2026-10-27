@@ -284,7 +284,7 @@ export function FormularioContacto({ servicios, categorias }: Props) {
       <button
         type="submit"
         disabled={estado.tipo === "enviando"}
-        className="glass glass-interactive inline-flex items-center gap-2 rounded-tf-sm bg-accent/90 px-6 py-3 text-sm font-bold uppercase tracking-wide text-on-accent disabled:opacity-60"
+        className="glass glass-interactive tf-texto-alto-contraste inline-flex items-center gap-2 rounded-tf-sm bg-accent/90 px-6 py-3 text-sm font-bold uppercase tracking-wide disabled:opacity-60"
       >
         {estado.tipo === "enviando" && (
           <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-on-accent/30 border-t-on-accent" aria-hidden="true" />

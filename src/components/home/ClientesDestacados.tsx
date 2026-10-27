@@ -23,6 +23,18 @@ type ClienteDestacado = {
 
 const CLIENTES: ClienteDestacado[] = [
   {
+    nombre: "Imagina School",
+    subtitulo: "Sede Tacna",
+    servicio: "Ampliación",
+    logo: "/imagenes/marca/imaginaschool.png",
+  },
+  {
+    nombre: "Innova School",
+    subtitulo: "Sede Tacna",
+    servicio: "Ampliación",
+    logo: "/imagenes/marca/innova.png",
+  },
+  {
     nombre: "Colegios Peruanos S.A.",
     subtitulo: "Innova Schools — varias sedes",
     servicio: "Supervisión y ampliación",
